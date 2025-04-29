@@ -16,7 +16,7 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import { jsPDF } from "jspdf";
 import { useAuth } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";  // ✅ Correct for App Router
+import { useRouter } from "next/navigation";  
 
 
 export default function AdvisorPage() {
@@ -33,12 +33,18 @@ export default function AdvisorPage() {
   const [showRecommendation, setShowRecommendation] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [response, setResponse] = useState(null);
-  const [history, setHistory] = useState(() => JSON.parse(localStorage.getItem('queryHistory')) || []);
+  const [history, setHistory] = useState([]);
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
-
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedHistory = JSON.parse(localStorage.getItem('queryHistory')) || [];
+      setHistory(storedHistory);
+    }
+    setIsVisible(true);
+  }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);

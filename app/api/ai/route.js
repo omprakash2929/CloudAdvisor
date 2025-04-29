@@ -78,7 +78,7 @@ export async function POST(req) {
       awsPrice = 10.15; // Fallback
     }
 
-    // Fetch DigitalOcean sizes (semi-dynamic)
+    // // Fetch DigitalOcean sizes (semi-dynamic)
     let doPrice;
     try {
       const doResponse = await axios.get('https://api.digitalocean.com/v2/sizes', {
@@ -92,13 +92,49 @@ export async function POST(req) {
 
     // Pricing options with affiliate links
     const pricingOptions = [
-      { provider: 'AWS', cost: awsPrice, features: '2 vCPUs, 1GB RAM, 10GB SSD', minTraffic: 1000, uptime: '99.99%', affiliateLink: 'https://aws.amazon.com' },
-      { provider: 'DigitalOcean', cost: doPrice, features: '2 vCPUs, 4GB RAM, 25GB SSD', minTraffic: 500, uptime: '99.95%', affiliateLink: 'https://www.digitalocean.com/?refcode=yourcode' },
+      { provider: 'AWS', cost: 10.15, features: '2 vCPUs, 1GB RAM, 10GB SSD', minTraffic: 1000, uptime: '99.99%', affiliateLink: 'https://aws.amazon.com' },
+      { provider: 'DigitalOcean', cost: doPrice, features: '2 vCPUs, 4GB RAM, 25GB SSD', minTraffic: 500, uptime: '99.95%', affiliateLink: 'https://www.digitalocean.com/' },
       { provider: 'Hostinger', cost: 9.99, features: '2 vCPUs, 4GB RAM, 200GB NVMe', minTraffic: 100, uptime: '99.90%', affiliateLink: 'https://www.hostinger.com' },
       { provider: 'Google Cloud Platform', cost: 13.50, features: '2 vCPUs, 1GB RAM, 10GB SSD', minTraffic: 1000, uptime: '99.98%', affiliateLink: 'https://cloud.google.com' },
       { provider: 'Microsoft Azure', cost: 12.40, features: '2 vCPUs, 4GB RAM, 16GB SSD', minTraffic: 800, uptime: '99.95%', affiliateLink: 'https://azure.microsoft.com' },
       { provider: 'Oracle Cloud Infrastructure', cost: 8.50, features: '1 vCPU, 1GB RAM, 20GB SSD', minTraffic: 200, uptime: '99.95%', affiliateLink: 'https://www.oracle.com/cloud' },
+    
+      // Additional Providers
+      { provider: 'Linode', cost: 10.00, features: '1 vCPU, 2GB RAM, 50GB SSD', minTraffic: 300, uptime: '99.99%', affiliateLink: 'https://www.linode.com' },
+      { provider: 'Vultr', cost: 6.00, features: '1 vCPU, 1GB RAM, 25GB SSD', minTraffic: 250, uptime: '99.95%', affiliateLink: 'https://www.vultr.com' },
+      { provider: 'Hetzner Cloud', cost: 4.50, features: '1 vCPU, 2GB RAM, 20GB SSD', minTraffic: 200, uptime: '99.99%', affiliateLink: 'https://www.hetzner.com/cloud' },
+      { provider: 'Kamatera', cost: 4.00, features: '1 vCPU, 1GB RAM, 20GB SSD', minTraffic: 150, uptime: '99.95%', affiliateLink: 'https://www.kamatera.com' },
+      { provider: 'UpCloud', cost: 5.00, features: '1 vCPU, 1GB RAM, 25GB MaxIOPS', minTraffic: 300, uptime: '99.99%', affiliateLink: 'https://upcloud.com' },
+      { provider: 'Scaleway', cost: 3.99, features: '1 vCPU, 2GB RAM, 20GB SSD', minTraffic: 200, uptime: '99.90%', affiliateLink: 'https://www.scaleway.com' },
+      { provider: 'OVHcloud', cost: 5.50, features: '1 vCPU, 2GB RAM, 40GB SSD', minTraffic: 250, uptime: '99.95%', affiliateLink: 'https://www.ovhcloud.com' },
+      { provider: 'Alibaba Cloud', cost: 11.00, features: '2 vCPUs, 4GB RAM, 40GB SSD', minTraffic: 700, uptime: '99.95%', affiliateLink: 'https://www.alibabacloud.com' },
+      { provider: 'Tencent Cloud', cost: 9.00, features: '2 vCPUs, 4GB RAM, 50GB SSD', minTraffic: 600, uptime: '99.90%', affiliateLink: 'https://intl.cloud.tencent.com' },
+    
+      // Additional Providers
+      { provider: 'AWS Lightsail', cost: 5.00, features: '1 vCPU, 1GB RAM, 20GB SSD', minTraffic: 300, uptime: '99.99%', affiliateLink: 'https://aws.amazon.com/lightsail' },
+      { provider: 'Bluehost', cost: 7.99, features: '2 vCPUs, 4GB RAM, 50GB SSD', minTraffic: 500, uptime: '99.90%', affiliateLink: 'https://www.bluehost.com' },
+      { provider: 'GreenGeeks', cost: 10.95, features: '2 vCPUs, 3GB RAM, 50GB SSD', minTraffic: 300, uptime: '99.95%', affiliateLink: 'https://www.greengeeks.com' },
+      { provider: 'SiteGround', cost: 6.99, features: '1 vCPU, 2GB RAM, 20GB SSD', minTraffic: 400, uptime: '99.99%', affiliateLink: 'https://www.siteground.com' },
+      { provider: 'A2 Hosting', cost: 4.99, features: '1 vCPU, 2GB RAM, 30GB SSD', minTraffic: 200, uptime: '99.95%', affiliateLink: 'https://www.a2hosting.com' },
+      { provider: 'FastComet', cost: 6.95, features: '2 vCPUs, 3GB RAM, 35GB SSD', minTraffic: 250, uptime: '99.99%', affiliateLink: 'https://www.fastcomet.com' },
+      { provider: 'Cloudways', cost: 12.00, features: '2 vCPUs, 4GB RAM, 40GB SSD', minTraffic: 600, uptime: '99.95%', affiliateLink: 'https://www.cloudways.com' },
+      { provider: 'Vexxhost', cost: 7.99, features: '2 vCPUs, 4GB RAM, 50GB SSD', minTraffic: 300, uptime: '99.98%', affiliateLink: 'https://vexxhost.com' },
+      { provider: 'Contabo', cost: 8.00, features: '2 vCPUs, 4GB RAM, 60GB SSD', minTraffic: 400, uptime: '99.90%', affiliateLink: 'https://www.contabo.com' },
+      { provider: 'DreamHost', cost: 10.00, features: '1 vCPU, 2GB RAM, 30GB SSD', minTraffic: 200, uptime: '99.95%', affiliateLink: 'https://www.dreamhost.com' },
+      { provider: 'Ionos', cost: 4.00, features: '1 vCPU, 1GB RAM, 10GB SSD', minTraffic: 100, uptime: '99.90%', affiliateLink: 'https://www.ionos.com' },
+    
+      // More Providers
+      { provider: 'Vultr Cloud Compute', cost: 7.00, features: '2 vCPUs, 4GB RAM, 50GB SSD', minTraffic: 500, uptime: '99.95%', affiliateLink: 'https://www.vultr.com/cloud-compute' },
+      { provider: 'Exoscale', cost: 5.00, features: '1 vCPU, 2GB RAM, 30GB SSD', minTraffic: 200, uptime: '99.99%', affiliateLink: 'https://www.exoscale.com' },
+      { provider: 'Lunanode', cost: 4.50, features: '1 vCPU, 2GB RAM, 40GB SSD', minTraffic: 300, uptime: '99.99%', affiliateLink: 'https://www.lunanode.com' },
+      { provider: 'Hostwinds', cost: 8.99, features: '2 vCPUs, 4GB RAM, 30GB SSD', minTraffic: 400, uptime: '99.99%', affiliateLink: 'https://www.hostwinds.com' },
+      { provider: 'InterServer', cost: 6.00, features: '2 vCPUs, 4GB RAM, 30GB SSD', minTraffic: 300, uptime: '99.90%', affiliateLink: 'https://www.interserver.net' },
+      { provider: 'Paperspace', cost: 12.00, features: '2 vCPUs, 4GB RAM, 40GB SSD', minTraffic: 600, uptime: '99.99%', affiliateLink: 'https://www.paperspace.com' },
+      { provider: 'UpStack', cost: 10.00, features: '2 vCPUs, 8GB RAM, 100GB SSD', minTraffic: 800, uptime: '99.99%', affiliateLink: 'https://www.upstack.co' },
+      { provider: 'Rackspace', cost: 13.00, features: '2 vCPUs, 8GB RAM, 50GB SSD', minTraffic: 1000, uptime: '99.99%', affiliateLink: 'https://www.rackspace.com' },
+      { provider: 'Webdock', cost: 6.99, features: '1 vCPU, 2GB RAM, 30GB SSD', minTraffic: 200, uptime: '99.95%', affiliateLink: 'https://www.webdock.io' }
     ];
+    
 
     // Filter pricing
     const filteredPricing = pricingOptions.filter(
