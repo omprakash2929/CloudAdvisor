@@ -6,7 +6,7 @@ export default function ChatbotAssistant() {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([
     { role: 'bot', text: 'Hey! I’m your Cloud Assistant. Ask me anything ☁️' },
-  ]);
+  ]);   //Initial message from the bot
   const [loading, setLoading] = useState(false);
 
   const sendMessage = async () => {
@@ -26,7 +26,7 @@ export default function ChatbotAssistant() {
       });
 
       const data = await res.json();
-      const botReply = data.reply || 'Sorry, I couldn’t understand that.';
+      const botReply = data.reply || 'Sorry, I couldn’t understand that. Please try again.';
       setMessages([...newMessages, { role: 'bot', text: botReply }]);
     } catch (err) {
       setMessages([...newMessages, { role: 'bot', text: 'Something went wrong. 😓' }]);

@@ -11,13 +11,13 @@ import {
   ArrowRight,
   Zap,
   Info,
+  MessageCircle,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { jsPDF } from "jspdf";
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";  
-
 
 export default function AdvisorPage() {
   const { isSignedIn, user } = useAuth();
@@ -44,6 +44,10 @@ export default function AdvisorPage() {
       setHistory(storedHistory);
     }
     setIsVisible(true);
+  }, []);
+  useEffect(() => {
+    console.log("Chatbot component mounted"); // Debugging log
+    console.log("Checking if window is defined:", typeof window !== "undefined"); // Debugging log
   }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -94,6 +98,59 @@ export default function AdvisorPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 overflow-hidden">
+      {/* Debugging log */}
+      {console.log("Rendering AdvisorPage component")}
+
+      {/* Chatbot */}
+      <div
+        style={{
+          position: "fixed",
+          top: "20px", // Position at the top of the screen
+          right: "20px",
+          zIndex: 1000,
+          width: "320px",
+          height: "400px",
+          backgroundColor: "white",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          borderRadius: "8px",
+          overflow: "hidden",
+        }}
+      >
+        <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+          <div
+            style={{
+              backgroundColor: "#2563eb",
+              color: "white",
+              padding: "10px",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <span style={{ fontWeight: "bold" }}>Chatbot</span>
+          </div>
+          <div style={{ flex: 1, padding: "10px", overflowY: "auto" }}>
+            <p style={{ fontSize: "14px", color: "#4b5563" }}>
+              Hello! How can I assist you today?
+            </p>
+            {/* Add chatbot messages and input here */}
+          </div>
+          <div style={{ padding: "10px", borderTop: "1px solid #e5e7eb" }}>
+            <input
+              type="text"
+              placeholder="Type a message..."
+              style={{
+                width: "100%",
+                padding: "8px",
+                border: "1px solid #d1d5db",
+                borderRadius: "4px",
+                outline: "none",
+              }}
+            />
+          </div>
+        </div>
+      </div>
+
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
         <div className="container mx-auto px-4 md:px-6">
@@ -613,3 +670,4 @@ export default function AdvisorPage() {
     </div>
   );
 }
+
