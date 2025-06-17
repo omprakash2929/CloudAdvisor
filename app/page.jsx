@@ -13,7 +13,8 @@ import {
 } from "lucide-react"
 import CloudBackground from "./componets/cloud-background"
 import { motion } from "framer-motion"
-import Navbar from "./componets/Navbar"
+import ChatbotAssistant from "./componets/ChatbotAssistant"
+
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false)
@@ -24,13 +25,10 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen bg-slate-50 overflow-hidden">
-      {/* Navbar */}
-      {/* <Navbar/> */}
-
       {/* Hero Section */}
       <section className="relative pt-24 pb-16 md:pt-32 md:pb-24 lg:pt-40 lg:pb-32 overflow-hidden">
         <CloudBackground />
-
+        
         <div className="container relative z-10 px-4 md:px-6 mx-auto">
           <div className="max-w-4xl mx-auto text-center mb-12 md:mb-20">
             <motion.div
